@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>   
+    <form method="POST" action="contactus">
+      Full Name: <input type="text" name="fullName"/> <br/> <br/> 
+      <input type="radio" name="type" value="suggestion" /> Suggestion  <input type="radio" name="type" value="Complaint" /> Complaint <br/> <br/> 
+      Message: <input type="text" name="message"/> <br/><br/> 
+      <input type="hidden" name="_csrf" value="#{csrftoken}"/>
+      <input type="submit" value="Submit"/>
+    </form>
+  </body>
+</html>
