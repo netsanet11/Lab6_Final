@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var validator = require('express-validator');
 var session = require('express-session');
-var csrf = require('csurf');
+//var csrf = require('csurf');
 
 
 var index = require('./routes/index');
@@ -43,10 +43,11 @@ app.use('/contactus', contactus);
 app.use('/thankyou', thankyou);
 
 
-app.use(csrf());
-app.use(function(req, res, next){
-    res.locals.csrf = req.csrfToken();
-})
+// app.use(csrf());
+// app.use(function(req, res, next){
+//     res.session._csrf = req.csrfToken();
+// })
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
