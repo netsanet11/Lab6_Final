@@ -10,7 +10,7 @@
       Full Name: <input type="text" name="fullName"/> <br/> <br/> 
       <input type="radio" name="type" value="suggestion" /> Suggestion  <input type="radio" name="type" value="Complaint" /> Complaint <br/> <br/> 
       Message: <input type="text" name="message"/> <br/><br/> 
-      <input type="hidden" name="_csrf" value="#{csrftoken}"/>
+      <input type="hidden" name="_csrf" value="{{_csrf}}"/>
       <input type="submit" value="Submit"/>
     </form>
   </body>
