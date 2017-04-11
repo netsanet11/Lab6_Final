@@ -2,17 +2,19 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var router = express.Router();
+var csrf = require('csurf');
 
 var urlEncodedParser = bodyParser.urlencoded();
+var csrfProtection = csrf({cookie: true});
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    console.log(req._csrf);
-    console.log(req.csrftoken);
-  res.render('contactus', { title: 'Contact Us' });
+router.get('/', csrfProtection, function(req, res, next) {
+    console.log("Get token: " + req.csrfToken());
+    res.render('contactus', { title: 'Contact Us', _csrf: req.csrfToken() });
 });
 
-router.post('/', urlEncodedParser,  function(req, res, next) {
+router.post('/', urlEncodedParser, csrfProtection,  function(req, res, next) {
     console.log(req.body.fullName);
+      console.log("Post Token " + req._csrf);       
     req.assert('fullName', 'Name is reqired').notEmpty();
     req.assert('message', 'Message is reqired').notEmpty();
 
@@ -30,6 +32,7 @@ router.post('/', urlEncodedParser,  function(req, res, next) {
             console.log('saving data failed');
       } );
         res.redirect('/thankyou?name=' + req.body.fullName);
+        res.end();
 });
 
 module.exports = router;
